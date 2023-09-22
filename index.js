@@ -5,13 +5,13 @@ const speechRec = window.SpeechRecognition || window.webkitSpeechRecognition
 const recognition = new speechRec()
 
 recognition.onstart = function(){
-    alert('Voice activeted')
+     content.textContent = "says"
 }
 
 recognition.onresult = function(event){
     const current = event.resultIndex
     const transcript = event.result[current][0].transcript
-   content.textContent = transcript
+   content.textContent += transcript
    readOutLoud(transcript)
 }
 
