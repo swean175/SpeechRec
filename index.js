@@ -5,7 +5,7 @@ const speechRec = window.SpeechRecognition || window.webkitSpeechRecognition
 const recognition = new speechRec()
 
 recognition.onstart = function(){
-    console.log('Voice activeted')
+    alert('Voice activeted')
 }
 
 recognition.onresult = function(event){
@@ -22,7 +22,7 @@ talkBtn.addEventListener('click', () => {
 function readOutLoud(message){
     const speech = new SpeechSynthesisUtterance()
 
-    speech.text = message
+    speech.text = "hello"
     speech.volume = 1
     speech.rate = 1
     speech.pitch = 1
