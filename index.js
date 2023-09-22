@@ -22,7 +22,7 @@ talkBtn.addEventListener('click', () => {
 function readOutLoud(message){
     const speech = new SpeechSynthesisUtterance()
 alert(speech)
-    speech.text = "hello"
+    speech.text = message
     speech.volume = 1
     speech.rate = 1
     speech.pitch = 1
