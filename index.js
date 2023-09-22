@@ -19,7 +19,7 @@ talkBtn.addEventListener('click', () => {
     recognition.start()
 })
 
-function readOutLoud(meaasge){
+function readOutLoud(message){
     const speech = new SpeechSynthesisUtterance()
 
     speech.text = message
