@@ -11,7 +11,7 @@ recognition.onstart = function(){
 recognition.onresult = function(event){
     const current = event.resultIndex
     const transcript = event.result[current][0].transcript
-   content.textContent = trsnscript
+   content.textContent = transcript
    readOutLoud(transcript)
 }
 
