@@ -3,13 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistant</title>
+    <title>Ana-Assistant</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <button id="talk">Talk</button>
-    <div >
-        <h2 id="content"></h2>
-    </div>
-    <script src="index.js"></script>
+   
+    <main>
+        <section class="chatbot-container">
+            <div class="chatbot-header">
+                <button id="talk"><i class="fa-solid fa-microphone-lines fa-2xl"></i></button>
+                <h1>Ana</h1>
+                <h2>Ask me anything!</h2>
+               
+                <button class="clear-btn" id="clear-btn">start over</button>
+            </div>
+            <div class="chatbot-conversation-container" id="chatbot-conversation">
+                <div class="speech speech-ai">
+                    How can I help you?
+                </div>
+              
+                <div >
+                    <h2 id="content"></h2>
+                </div>
+            </div>
+            <form id="form" class="chatbot-input-container">
+                <input name="user-input" type="text" id="user-input" required>
+                <button id="submit-btn" class="submit-btn">
+                    <img 
+                        src="images/send-btn-icon.png" 
+                        class="send-btn-icon"
+                    >
+                </button>
+            </form>
+        </section>
+    </main>
+    <script type="module" src="index.js"></script>
 </body>
 </html>
