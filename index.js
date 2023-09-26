@@ -20,7 +20,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 const appSettings = {
-    databaseURL: 'https://aiassistent-10cdd-default-rtdb.europe-west1.firebasedatabase.app/'
+    databaseURL: process.env.fireurl
 }
 
 const app = initializeApp(appSettings)
@@ -112,9 +112,10 @@ function renderConversationFromDb(){
         }
     })
 }
+//-------------------new Speech Api--------------
 
 
-//---------------rest speech------------------
+//---------------rest of speech------------------
 
 
 recognition.onstart = function(){
