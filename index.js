@@ -59,7 +59,7 @@ document.addEventListener('submit', (e) => {
 
 let conversationStr = ""
 async function fetchReply() {
-    const url = 'https://remarkable-torrone-f0f6ea.netlify.app/fetchAI/fetchAI'
+    const url = 'https://remarkable-torrone-f0f6ea.netlify.app/.fetchAI/fetchAI'
     const responed = await fetch(url, {
         method: 'POST',
         headers: {
