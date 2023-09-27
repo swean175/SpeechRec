@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 
-// import { Configuration, OpenAIApi } from 'openai'
+import { Configuration, OpenAIApi } from 'openai'
+import { process } from './env'
 
 
 
@@ -17,11 +18,11 @@ recognition.lang = 'pl'
 
 
 //-------------------------------
-// const configuration = new Configuration({
-//     apiKey: process.env.OPENAI_API_KEY,
-// })
+const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+})
 
-// const openai = new OpenAIApi(configuration)
+const openai = new OpenAIApi(configuration)
 
 const appSettings = {
     databaseURL: 'https://aiassistent-10cdd-default-rtdb.europe-west1.firebasedatabase.app/'
@@ -66,30 +67,17 @@ async function fetchReply() {
         if (snapshot.exists()) {
             const conversationArr = Object.values(snapshot.val())
             conversationArr.unshift(instructionObj)
-            // const response = await openai.createChatCompletion({
-            //     model: 'gpt-4',
-            //     messages: conversationArr,
-            //     presence_penalty: 0,
-            //     frequency_penalty: 0.3
-            // })
-            let conversationStr =  conversationArr
-           
-
-
-            const url = 'https://remarkable-torrone-f0f6ea.netlify.app/.netlify/functions/fetchAI'
-            const responed = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'content-type':'text/plain',
-                },
-                body: conversationStr
+            const response = await openai.createChatCompletion({
+                model: 'gpt-4',
+                messages: conversationArr,
+                presence_penalty: 0,
+                frequency_penalty: 0.3
             })
-        // const data = await responed.json()
-         console.log(responed)
+         
 
-            // push(conversationInDb, response.data.choices[0].message)
-            // renderTypewriterText(response.data.choices[0].message.content)
-            // elevenSpeak(response.data.choices[0].message.content+".....")
+            push(conversationInDb, response.data.choices[0].message)
+            renderTypewriterText(response.data.choices[0].message.content)
+            elevenSpeak(response.data.choices[0].message.content+".....")
             
         }
         else {
