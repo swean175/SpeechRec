@@ -1,8 +1,9 @@
 {
   "name": "project",
   "dependencies": {
-    "openai": "3.2.1",
-    "firebase": "9.20.0"
+    "elevenlabs-node": "^1.2.0",
+    "firebase": "9.20.0",
+    "openai": "3.2.1"
   },
   "devDependencies": {
     "vite": "latest"

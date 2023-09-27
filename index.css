@@ -12,10 +12,11 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
+    background-color: #0e141b;
 }
 
 main {    
-    background-color: slategrey;
+    background-color: #0e141b;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -32,9 +33,9 @@ main {
 /* chatbot elements */
 
 .chatbot-container {
-    background-color: #16202C;
-    width: 360px;
-    min-height: 380px;
+    background-color: #030a13;
+    width: 80%;
+    min-height: 70%;
     border-radius: var(--border-rad-lg);
     display: flex;
     flex-direction: column;
@@ -51,6 +52,11 @@ main {
  gap: 1em;
 }
 
+.chatbot-header>h1{
+    font-size: 2rem;
+    margin-right: 0.5em;
+}
+
 .chatbot-header > * {
     margin: .11em;
 }
@@ -60,20 +66,16 @@ main {
     width: 45px;
 }
 
-.supportId {
-    font-size: 10px;
-    grid-area: supportId;
-    text-align: center;
-}
+
 
 .clear-btn {
     grid-area: clear-btn;
-    height: 20px;
+    height: 40px;
     padding: 0;
-    width: 40%;
+    width: 25%;
     color: var(--medium-light-text);
     font-size: 12px;
-    margin: 0 auto; 
+    margin: 1em 0 0 auto; 
 }
 
 .clear-btn:hover {
@@ -83,7 +85,7 @@ main {
 }
 
 .chatbot-conversation-container {
-    max-height: 250px;
+    max-height: 700px;
     min-height: 250px;
     overflow-y: scroll;
     margin: 1em 0;
