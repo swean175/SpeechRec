@@ -94,43 +94,43 @@ console.log(data)
 
 
 
-function renderTypewriterText(text) {
-    const newSpeechBubble = document.createElement('div')
-    newSpeechBubble.classList.add('speech', 'speech-ai', 'blinking-cursor')
-    chatbotConversation.appendChild(newSpeechBubble)
-    let i = 0
-    const interval = setInterval(() => {
-        newSpeechBubble.textContent += text.slice(i - 1, i)
-        if (text.length === i) {
-            clearInterval(interval)
-            newSpeechBubble.classList.remove('blinking-cursor')
-        }
-        i++
-        chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-    }, 50)
-}
+// function renderTypewriterText(text) {
+//     const newSpeechBubble = document.createElement('div')
+//     newSpeechBubble.classList.add('speech', 'speech-ai', 'blinking-cursor')
+//     chatbotConversation.appendChild(newSpeechBubble)
+//     let i = 0
+//     const interval = setInterval(() => {
+//         newSpeechBubble.textContent += text.slice(i - 1, i)
+//         if (text.length === i) {
+//             clearInterval(interval)
+//             newSpeechBubble.classList.remove('blinking-cursor')
+//         }
+//         i++
+//         chatbotConversation.scrollTop = chatbotConversation.scrollHeight
+//     }, 50)
+// }
 
-document.getElementById('clear-btn').addEventListener('click', () => {
-    remove(conversationInDb)
-    chatbotConversation.innerHTML = '<div class="speech speech-ai">How can I help you?</div>'
-})
+// document.getElementById('clear-btn').addEventListener('click', () => {
+//     remove(conversationInDb)
+//     chatbotConversation.innerHTML = '<div class="speech speech-ai">How can I help you?</div>'
+// })
 
-function renderConversationFromDb(){
-    get(conversationInDb).then(async (snapshot)=>{
-        if(snapshot.exists()) {
-            Object.values(snapshot.val()).forEach(dbObj => {
-                const newSpeechBubble = document.createElement('div')
-                newSpeechBubble.classList.add(
-                    'speech',
-                    `speech-${dbObj.role === 'user' ? 'human' : 'ai'}`
-                    )
-                chatbotConversation.appendChild(newSpeechBubble)
-                newSpeechBubble.textContent = dbObj.content
-            })
-            chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-        }
-    })
-}
+// function renderConversationFromDb(){
+//     get(conversationInDb).then(async (snapshot)=>{
+//         if(snapshot.exists()) {
+//             Object.values(snapshot.val()).forEach(dbObj => {
+//                 const newSpeechBubble = document.createElement('div')
+//                 newSpeechBubble.classList.add(
+//                     'speech',
+//                     `speech-${dbObj.role === 'user' ? 'human' : 'ai'}`
+//                     )
+//                 chatbotConversation.appendChild(newSpeechBubble)
+//                 newSpeechBubble.textContent = dbObj.content
+//             })
+//             chatbotConversation.scrollTop = chatbotConversation.scrollHeight
+//         }
+//     })
+// }
 
 //------------------------Eleven----------
 
