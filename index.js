@@ -1,5 +1,5 @@
-// import { initializeApp } from 'firebase/app'
-// import { getDatabase, ref, push, get, remove } from 'firebase/database'
+import { initializeApp } from 'firebase/app'
+import { getDatabase, ref, push, get, remove } from 'firebase/database'
 
 // import { Configuration, OpenAIApi } from 'openai'
 
@@ -27,11 +27,11 @@ recognition.lang = 'pl'
 //     databaseURL: process.env.fireurl
 // }
 
-// const app = initializeApp(appSettings)
+const app = initializeApp(appSettings)
 
-// const database = getDatabase(app)
+const database = getDatabase(app)
 
-// const conversationInDb = ref(database)
+const conversationInDb = ref(database)
 
 const chatbotConversation = document.getElementById('chatbot-conversation')
 
@@ -43,94 +43,101 @@ const instructionObj = {
 document.addEventListener('submit', (e) => {
     e.preventDefault()
   
-    // push(conversationInDb, {
-    //     role: 'user',
-    //     content: userInput.value
-    // })
+    push(conversationInDb, {
+        role: 'user',
+        content: userInput.value
+    })
     fetchReply()
-    // const newSpeechBubble = document.createElement('div')
-    // newSpeechBubble.classList.add('speech', 'speech-human')
-    // chatbotConversation.appendChild(newSpeechBubble)
-    // newSpeechBubble.textContent = userInput.value
-    // userInput.value = ''
-    // chatbotConversation.scrollTop = chatbotConversation.scrollHeight
+    const newSpeechBubble = document.createElement('div')
+    newSpeechBubble.classList.add('speech', 'speech-human')
+    chatbotConversation.appendChild(newSpeechBubble)
+    newSpeechBubble.textContent = userInput.value
+    userInput.value = ''
+    chatbotConversation.scrollTop = chatbotConversation.scrollHeight
 })
 
 
-let conversationStr = ""
+
+
+
 async function fetchReply() {
-    const url = 'https://remarkable-torrone-f0f6ea.netlify.app/fetchAI/fetchAI'
-    const responed = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'content-type':'rext/plain',
-        },
-        body: conversationStr
-    })
-const data = await responed.json()
-console.log(data)
 
-    // get(conversationInDb).then(async (snapshot) => {
-    //     if (snapshot.exists()) {
-    //         const conversationArr = Object.values(snapshot.val())
-    //         conversationArr.unshift(instructionObj)
-    //         const response = await openai.createChatCompletion({
-    //             model: 'gpt-4',
-    //             messages: conversationArr,
-    //             presence_penalty: 0,
-    //             frequency_penalty: 0.3
-    //         })
-    //         push(conversationInDb, response.data.choices[0].message)
-    //         renderTypewriterText(response.data.choices[0].message.content)
-    //         elevenSpeak(response.data.choices[0].message.content+".....")
+    get(conversationInDb).then(async (snapshot) => {
+        if (snapshot.exists()) {
+            const conversationArr = Object.values(snapshot.val())
+            conversationArr.unshift(instructionObj)
+            // const response = await openai.createChatCompletion({
+            //     model: 'gpt-4',
+            //     messages: conversationArr,
+            //     presence_penalty: 0,
+            //     frequency_penalty: 0.3
+            // })
+            let conversationStr =  conversationArr
+           
+
+
+            const url = 'https://remarkable-torrone-f0f6ea.netlify.app/fetchAI/fetchAI'
+            const responed = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'content-type':'text/plain',
+                },
+                body: conversationStr
+            })
+        // const data = await responed.json()
+         console.log(responed)
+
+            // push(conversationInDb, response.data.choices[0].message)
+            // renderTypewriterText(response.data.choices[0].message.content)
+            // elevenSpeak(response.data.choices[0].message.content+".....")
             
-    //     }
-    //     else {
-    //        alert('No data available')
-    //     }
+        }
+        else {
+           alert('No data available')
+        }
 
-    // })
+    })
 }
 
 
 
-// function renderTypewriterText(text) {
-//     const newSpeechBubble = document.createElement('div')
-//     newSpeechBubble.classList.add('speech', 'speech-ai', 'blinking-cursor')
-//     chatbotConversation.appendChild(newSpeechBubble)
-//     let i = 0
-//     const interval = setInterval(() => {
-//         newSpeechBubble.textContent += text.slice(i - 1, i)
-//         if (text.length === i) {
-//             clearInterval(interval)
-//             newSpeechBubble.classList.remove('blinking-cursor')
-//         }
-//         i++
-//         chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-//     }, 50)
-// }
+function renderTypewriterText(text) {
+    const newSpeechBubble = document.createElement('div')
+    newSpeechBubble.classList.add('speech', 'speech-ai', 'blinking-cursor')
+    chatbotConversation.appendChild(newSpeechBubble)
+    let i = 0
+    const interval = setInterval(() => {
+        newSpeechBubble.textContent += text.slice(i - 1, i)
+        if (text.length === i) {
+            clearInterval(interval)
+            newSpeechBubble.classList.remove('blinking-cursor')
+        }
+        i++
+        chatbotConversation.scrollTop = chatbotConversation.scrollHeight
+    }, 50)
+}
 
-// document.getElementById('clear-btn').addEventListener('click', () => {
-//     remove(conversationInDb)
-//     chatbotConversation.innerHTML = '<div class="speech speech-ai">How can I help you?</div>'
-// })
+document.getElementById('clear-btn').addEventListener('click', () => {
+    remove(conversationInDb)
+    chatbotConversation.innerHTML = '<div class="speech speech-ai">How can I help you?</div>'
+})
 
-// function renderConversationFromDb(){
-//     get(conversationInDb).then(async (snapshot)=>{
-//         if(snapshot.exists()) {
-//             Object.values(snapshot.val()).forEach(dbObj => {
-//                 const newSpeechBubble = document.createElement('div')
-//                 newSpeechBubble.classList.add(
-//                     'speech',
-//                     `speech-${dbObj.role === 'user' ? 'human' : 'ai'}`
-//                     )
-//                 chatbotConversation.appendChild(newSpeechBubble)
-//                 newSpeechBubble.textContent = dbObj.content
-//             })
-//             chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-//         }
-//     })
-// }
+function renderConversationFromDb(){
+    get(conversationInDb).then(async (snapshot)=>{
+        if(snapshot.exists()) {
+            Object.values(snapshot.val()).forEach(dbObj => {
+                const newSpeechBubble = document.createElement('div')
+                newSpeechBubble.classList.add(
+                    'speech',
+                    `speech-${dbObj.role === 'user' ? 'human' : 'ai'}`
+                    )
+                chatbotConversation.appendChild(newSpeechBubble)
+                newSpeechBubble.textContent = dbObj.content
+            })
+            chatbotConversation.scrollTop = chatbotConversation.scrollHeight
+        }
+    })
+}
 
 //------------------------Eleven----------
 
@@ -276,6 +283,6 @@ talkBtn.addEventListener('click', () => {
   
 //     window.speechSynthesis.speak(speech)
 // }
-// renderConversationFromDb()
+renderConversationFromDb()
 
 
