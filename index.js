@@ -57,9 +57,9 @@ document.addEventListener('submit', (e) => {
 })
 
 
-const conversationStr = {empty:"cos"}
+let conversationStr = ""
 async function fetchReply() {
-    const url = 'https://remarkable-torrone-f0f6ea.netlify.app/.feychAI/fetchAI'
+    const url = 'https://remarkable-torrone-f0f6ea.netlify.app/feychAI/fetchAI'
     const responed = await fetch(url, {
         method: 'POST',
         headers: {
