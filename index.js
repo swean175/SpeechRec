@@ -276,6 +276,6 @@ talkBtn.addEventListener('click', () => {
   
 //     window.speechSynthesis.speak(speech)
 // }
-renderConversationFromDb()
+// renderConversationFromDb()
 
 
