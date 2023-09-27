@@ -1,5 +1,5 @@
-import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, push, get, remove } from 'firebase/database'
+// import { initializeApp } from 'firebase/app'
+// import { getDatabase, ref, push, get, remove } from 'firebase/database'
 
 // import { Configuration, OpenAIApi } from 'openai'
 
@@ -23,15 +23,15 @@ recognition.lang = 'pl'
 
 // const openai = new OpenAIApi(configuration)
 
-const appSettings = {
-    databaseURL: process.env.fireurl
-}
+// const appSettings = {
+//     databaseURL: process.env.fireurl
+// }
 
-const app = initializeApp(appSettings)
+// const app = initializeApp(appSettings)
 
-const database = getDatabase(app)
+// const database = getDatabase(app)
 
-const conversationInDb = ref(database)
+// const conversationInDb = ref(database)
 
 const chatbotConversation = document.getElementById('chatbot-conversation')
 
@@ -48,12 +48,12 @@ document.addEventListener('submit', (e) => {
         content: userInput.value
     })
     fetchReply()
-    const newSpeechBubble = document.createElement('div')
-    newSpeechBubble.classList.add('speech', 'speech-human')
-    chatbotConversation.appendChild(newSpeechBubble)
-    newSpeechBubble.textContent = userInput.value
-    userInput.value = ''
-    chatbotConversation.scrollTop = chatbotConversation.scrollHeight
+    // const newSpeechBubble = document.createElement('div')
+    // newSpeechBubble.classList.add('speech', 'speech-human')
+    // chatbotConversation.appendChild(newSpeechBubble)
+    // newSpeechBubble.textContent = userInput.value
+    // userInput.value = ''
+    // chatbotConversation.scrollTop = chatbotConversation.scrollHeight
 })
 
 
@@ -70,26 +70,26 @@ async function fetchReply() {
 const data = await responed.json()
 console.log(data)
 
-    get(conversationInDb).then(async (snapshot) => {
-        if (snapshot.exists()) {
-            const conversationArr = Object.values(snapshot.val())
-            conversationArr.unshift(instructionObj)
-            const response = await openai.createChatCompletion({
-                model: 'gpt-4',
-                messages: conversationArr,
-                presence_penalty: 0,
-                frequency_penalty: 0.3
-            })
-            push(conversationInDb, response.data.choices[0].message)
-            renderTypewriterText(response.data.choices[0].message.content)
-            elevenSpeak(response.data.choices[0].message.content+".....")
+    // get(conversationInDb).then(async (snapshot) => {
+    //     if (snapshot.exists()) {
+    //         const conversationArr = Object.values(snapshot.val())
+    //         conversationArr.unshift(instructionObj)
+    //         const response = await openai.createChatCompletion({
+    //             model: 'gpt-4',
+    //             messages: conversationArr,
+    //             presence_penalty: 0,
+    //             frequency_penalty: 0.3
+    //         })
+    //         push(conversationInDb, response.data.choices[0].message)
+    //         renderTypewriterText(response.data.choices[0].message.content)
+    //         elevenSpeak(response.data.choices[0].message.content+".....")
             
-        }
-        else {
-           alert('No data available')
-        }
+    //     }
+    //     else {
+    //        alert('No data available')
+    //     }
 
-    })
+    // })
 }
 
 
