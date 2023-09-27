@@ -23,9 +23,9 @@ recognition.lang = 'pl'
 
 // const openai = new OpenAIApi(configuration)
 
-// const appSettings = {
-//     databaseURL: process.env.fireurl
-// }
+const appSettings = {
+    databaseURL: 'https://aiassistent-10cdd-default-rtdb.europe-west1.firebasedatabase.app/'
+}
 
 const app = initializeApp(appSettings)
 
