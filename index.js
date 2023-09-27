@@ -43,10 +43,10 @@ const instructionObj = {
 document.addEventListener('submit', (e) => {
     e.preventDefault()
   
-    push(conversationInDb, {
-        role: 'user',
-        content: userInput.value
-    })
+    // push(conversationInDb, {
+    //     role: 'user',
+    //     content: userInput.value
+    // })
     fetchReply()
     // const newSpeechBubble = document.createElement('div')
     // newSpeechBubble.classList.add('speech', 'speech-human')
