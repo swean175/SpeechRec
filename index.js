@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 
-import { Configuration, OpenAIApi } from 'openai'
+// import { Configuration, OpenAIApi } from 'openai'
 
 
 
@@ -17,11 +17,11 @@ recognition.lang = 'pl'
 
 
 //-------------------------------
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-})
+// const configuration = new Configuration({
+//     apiKey: process.env.OPENAI_API_KEY,
+// })
 
-const openai = new OpenAIApi(configuration)
+// const openai = new OpenAIApi(configuration)
 
 const appSettings = {
     databaseURL: process.env.fireurl
@@ -59,6 +59,17 @@ document.addEventListener('submit', (e) => {
 
 
 async function fetchReply() {
+    const url = 'https://remarkable-torrone-f0f6ea.netlify.app/feychAI/fetchAI'
+    const responed = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-type':'rext/plain',
+        },
+        body: conversationStr
+    })
+const data = await responed.json()
+console.log(data)
+
     get(conversationInDb).then(async (snapshot) => {
         if (snapshot.exists()) {
             const conversationArr = Object.values(snapshot.val())
