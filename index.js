@@ -76,7 +76,7 @@ async function fetchReply() {
            
 
 
-            const url = 'https://remarkable-torrone-f0f6ea.netlify.app/fetchAI/fetchAI'
+            const url = 'https://remarkable-torrone-f0f6ea.netlify.app/.netlify/functions/fetchAI'
             const responed = await fetch(url, {
                 method: 'POST',
                 headers: {
