@@ -2,10 +2,17 @@ import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, push, get, remove } from 'firebase/database'
 
 import { Configuration, OpenAIApi } from 'openai'
-import { process } from './env'
 
 
-
+async function getApis(){
+    const serUrl = 'http://localhost:8888//.netlify/functions/helloWorld'                  // 'https://remarkable-torrone-f0f6ea.netlify.app/.netlify/functions/helloWorld'
+    const response = await fetch(serUrl)
+    .then(res=>res.json())
+    .then(data => data.body)
+   console.log(response)
+    
+}
+getApis()
 
 const userInput = document.getElementById('user-input')
 const talkBtn = document.getElementById('talk')
@@ -19,13 +26,13 @@ recognition.lang = 'pl'
 
 //-------------------------------
 const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: "open", // ---------------------------------to change
 })
 
 const openai = new OpenAIApi(configuration)
 
 const appSettings = {
-    databaseURL: 'https://aiassistent-10cdd-default-rtdb.europe-west1.firebasedatabase.app/'
+    databaseURL: 'fire/'  //----------------------to change
 }
 
 const app = initializeApp(appSettings)
@@ -38,7 +45,7 @@ const chatbotConversation = document.getElementById('chatbot-conversation')
 
 const instructionObj = {
     role: 'system',
-    content: 'You are a helpful, flirty, funny, teasy assistant, your name is Ana my name is Damian and i am amzing'
+    content: 'You are a helpful, flirty, funny, teasy assistant, your name is Ana my name is Damian and i am amzing'  
 }
 
 document.addEventListener('submit', (e) => {
@@ -150,7 +157,7 @@ let nextTime = 0; // This variable will keep track of the time the next chunk sh
                 "stability": 0.5,
                 "similarity_boost": true
             },
-            "xi_api_key": process.env.Eleven_API_KEY, // replace with your API key
+            "xi_api_key": 'eleven', // replace with your API key ----------------------------- to change
         };
     
         socket.send(JSON.stringify(bosMessage));
