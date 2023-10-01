@@ -4,15 +4,31 @@ import { getDatabase, ref, push, get, remove } from 'firebase/database'
 import { Configuration, OpenAIApi } from 'openai'
 
 
-async function getApis(){
-    const serUrl = 'http://localhost:8888//.netlify/functions/helloWorld'                  // 'https://remarkable-torrone-f0f6ea.netlify.app/.netlify/functions/helloWorld'
-    const response = await fetch(serUrl)
-    .then(res=>res.json())
-    .then(data => data.body)
-   console.log(response)
-    
-}
-getApis()
+
+const getApis = async () => {await(await fetch('http://localhost:8888//.netlify/functions/helloWorld')).json()
+.then((data) => data.response)}
+
+console.log(getApis)
+
+//async function getApis(api){
+//const serUrl = 'http://localhost:8888/.netlify/functions/apis'                  // 'https://remarkable-torrone-f0f6ea.netlify.app/.netlify/functions/apis'
+//const response = await fetch(serUrl)
+//.then((res) => res.json())
+//.then((data) => data.response)
+
+//return api==="fire"?response.fire:api==="ai"?response.ai:response.eleven
+//}
+
+
+// function key(api) {
+//     return new Promise(async function (resolve, reject){
+//         const back = await getApis(api)
+
+//         resolve(back)
+//     }) 
+// }
+
+
 
 const userInput = document.getElementById('user-input')
 const talkBtn = document.getElementById('talk')
@@ -26,13 +42,13 @@ recognition.lang = 'pl'
 
 //-------------------------------
 const configuration = new Configuration({
-    apiKey: "open", // ---------------------------------to change
+    apiKey: key("ai"), // ---------------------------------to change
 })
 
 const openai = new OpenAIApi(configuration)
 
 const appSettings = {
-    databaseURL: 'fire/'  //----------------------to change
+    databaseURL: key("fire"), //----------------------to change
 }
 
 const app = initializeApp(appSettings)
@@ -157,7 +173,7 @@ let nextTime = 0; // This variable will keep track of the time the next chunk sh
                 "stability": 0.5,
                 "similarity_boost": true
             },
-            "xi_api_key": 'eleven', // replace with your API key ----------------------------- to change
+            "xi_api_key": key("aeleven"), // replace with your API key ----------------------------- to change
         };
     
         socket.send(JSON.stringify(bosMessage));
