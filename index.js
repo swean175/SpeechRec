@@ -6,7 +6,7 @@ import { Configuration, OpenAIApi } from 'openai'
 const getApis = async () => {await(await fetch('http://localhost:8888//.netlify/functions/helloWorld')).json()
    .then((data) => data.response)}
 
-   console.log(getApis)
+   console.log("fetch responmnse"+getApis)
 //async function getApis(){
    // const serUrl = 'http://localhost:8888//.netlify/functions/helloWorld'                  // 'https://remarkable-torrone-f0f6ea.netlify.app/.netlify/functions/helloWorld'
    // const response = await fetch(serUrl)
