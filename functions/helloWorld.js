@@ -25,4 +25,3 @@ const handler = async (event) =>{
 module.exports = { handler }
 
 
-//OPENAI_API_KEY: process.env.OPENAI_API_KEY, fireurl: process.env.fireurl, Eleven_API_KEY: process.env.Eleven_API_KEY
