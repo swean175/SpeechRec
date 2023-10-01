@@ -3,7 +3,7 @@ import { getDatabase, ref, push, get, remove } from 'firebase/database'
 
 import { Configuration, OpenAIApi } from 'openai'
 
-const getApis = async () => await(await fetch('http://localhost:8888//.netlify/functions/helloWorld')).jason().then((data) => console.log(data.response)
+const getApis = async () => await(await fetch('http://localhost:8888//.netlify/functions/helloWorld')).json().then((data) => console.log(data.response)
 //async function getApis(){
    // const serUrl = 'http://localhost:8888//.netlify/functions/helloWorld'                  // 'https://remarkable-torrone-f0f6ea.netlify.app/.netlify/functions/helloWorld'
    // const response = await fetch(serUrl)
