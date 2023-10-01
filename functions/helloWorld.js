@@ -12,6 +12,11 @@ const handler = async (event) =>{
 
     return {
         statusCode: 200,
+       headers: {
+          'Acces-Control-Allow-Origin' : '*',
+          'Acces-Control-Allow-Headers' :
+             'Origin, X-Requested-With, Content-Type, Accept'
+       },
         body: JSON.stringify({
             reply: response
         })
